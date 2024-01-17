@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { getAllProduct } = require('../controllers/ApiController');
+const { getAllProduct, LoginAdmin } = require('../controllers/ApiController');
 
 router.get('/product', getAllProduct);
-
+router.get('/admin', LoginAdmin);
 
 
 

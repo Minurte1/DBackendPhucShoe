@@ -37,6 +37,20 @@ const getAllProduct = async (req, res) => {
         });
     }
 };
+const LoginAdmin = async (req, res) => {
+    try {
+        const [results, fields] = await (await connection).execute('SELECT * FROM ADMIN');
+        return res.status(200).json({
+            message: "ok",
+
+            admin: results,
+        });
+
+    } catch (error) {
+        console.error("Lỗi ", error);
+        res.status(500).json({ error: "Lỗi server" });
+    }
+}
 const getDonHangg = async (Time, id, MaSP, SoluongDaMua, Tongtien) => {
     let idKhachHang = id;
     console.log('time=>', Time)
@@ -195,4 +209,4 @@ const getProduct = async (req, res) => {
 
 
 
-module.exports = { getAllProduct, getProduct, DeleteDonHang, getDeleteUser }; // Export as an object
+module.exports = { getAllProduct, getProduct, DeleteDonHang, getDeleteUser, LoginAdmin }; // Export as an object
