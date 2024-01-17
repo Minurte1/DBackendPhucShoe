@@ -38,14 +38,23 @@ const getAllProduct = async (req, res) => {
     }
 };
 const LoginAdmin = async (req, res) => {
+    // console.log(req.body)
+    const taikhoanAdmin = req.body.taikhoanAdmin;
+    const MatkhauAdmin = req.body.matkhauAdmin;
+    console.log(taikhoanAdmin, MatkhauAdmin)
     try {
         const [results, fields] = await (await connection).execute('SELECT * FROM ADMIN');
-        return res.status(200).json({
-            message: "ok",
 
-            admin: results,
-        });
-
+        // console.log(results[0].TAIKHOAN);
+        if (results[0].TAIKHOAN === taikhoanAdmin && results[0].MATKHAU === MatkhauAdmin) {
+            return res.status(200).json({
+                message: "UnCook",
+            });
+        } else {
+            return res.status(401).json({
+                message: "Cook",
+            });
+        }
     } catch (error) {
         console.error("Lỗi ", error);
         res.status(500).json({ error: "Lỗi server" });
