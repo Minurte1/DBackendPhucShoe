@@ -37,6 +37,7 @@ const getAllProduct = async (req, res) => {
         });
     }
 };
+const jwt = require('jsonwebtoken');
 const LoginAdmin = async (req, res) => {
     // console.log(req.body)
     const taikhoanAdmin = req.body.taikhoanAdmin;
@@ -47,8 +48,13 @@ const LoginAdmin = async (req, res) => {
 
         // console.log(results[0].TAIKHOAN);
         if (results[0].TAIKHOAN === taikhoanAdmin && results[0].MATKHAU === MatkhauAdmin) {
+            const id = results[0].MATKHAU;
+            const token = jwt.sign({ id }, "jwtSecretKey", { expiresIn: 300 });
+
             return res.status(200).json({
+                Login: true, token, results,
                 message: "UnCook",
+
             });
         } else {
             return res.status(401).json({

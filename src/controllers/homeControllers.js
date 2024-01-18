@@ -711,15 +711,7 @@ const getThongkeAll = async (req, res) => {
         res.status(500).json({ error: "Lỗi server" });
     }
 }
-const LoginAdmin = (req, res) => {
-    try {
 
-
-    } catch (error) {
-        console.error("Lỗi khi lấy thông tin chi tiết đơn hàng:", error);
-        res.status(500).json({ error: "Lỗi server" });
-    }
-}
 module.exports = {
     // getAllProduct,
     getABC,
